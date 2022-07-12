@@ -7,6 +7,8 @@ import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/KeeperCompatibleInterface.sol";
 
+import "hardhat/console.sol";
+
 // Custom Errors
 error Raffle__NotEnoughETHEntered();
 error Raffle__TransferFailed();
@@ -51,11 +53,11 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
 
   constructor(
     address vrfCoordinatorV2,
-    uint256 entranceFee,
-    bytes32 gasLane,
     uint64 subcriptionId,
-    uint32 callbackGasLimit,
-    uint256 interval
+    bytes32 gasLane,
+    uint256 interval,
+    uint256 entranceFee,
+    uint32 callbackGasLimit
   ) VRFConsumerBaseV2(vrfCoordinatorV2) {
     i_entranceFee = entranceFee;
     i_vrfCoordinator = VRFCoordinatorV2Interface(vrfCoordinatorV2);
@@ -169,5 +171,9 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
 
   function getRequestConfirmations() public pure returns (uint256) {
     return REQUEST_CONFIRMATIONS;
+  }
+
+  function getInterval() public view returns (uint256) {
+    return i_interval;
   }
 }

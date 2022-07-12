@@ -28,6 +28,15 @@ const config: HardhatUserConfig = {
   solidity: {
     compilers: [{ version: "0.8.9", settings: {} }],
   },
+  gasReporter: {
+    // enabled: process.env.REPORT_GAS !== undefined,
+    enabled: false,
+    currency: "INR",
+    outputFile: "gas-report.txt",
+    noColors: true,
+    coinmarketcap: process.env.COINMARKETCAP_API_KEY,
+    token: "ETH",
+  },
 
   namedAccounts: {
     deployer: {
