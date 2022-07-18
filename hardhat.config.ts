@@ -28,6 +28,14 @@ const config: HardhatUserConfig = {
   solidity: {
     compilers: [{ version: "0.8.9", settings: {} }],
   },
+
+  mocha: {
+    timeout: 300000, // 300 seconds max
+  },
+  etherscan: {
+    apiKey: process.env.ETHERSCAN_API_KEY,
+  },
+
   gasReporter: {
     // enabled: process.env.REPORT_GAS !== undefined,
     enabled: false,
