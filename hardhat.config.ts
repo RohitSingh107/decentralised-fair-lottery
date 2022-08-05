@@ -14,6 +14,10 @@ dotenv.config()
 const config: HardhatUserConfig = {
   defaultNetwork: "hardhat",
   networks: {
+    localhost: {
+      chainId: 31337,
+      // blockConfirmations: 1,
+    },
     hardhat: {
       chainId: 31337,
       // blockConfirmations: 1,
