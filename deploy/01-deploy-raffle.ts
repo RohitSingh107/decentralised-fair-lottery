@@ -67,6 +67,15 @@ module.exports = async (hre: HardhatRuntimeEnvironment) => {
     await verify(raffle.address, args)
     log("--------------------------------------------")
   }
+
+  // Adding Consumer to vrf Mock
+  if (developmentChains.includes(network.name)) {
+    const vRFCoordinatorV2Mock = await ethers.getContract(
+      "VRFCoordinatorV2Mock"
+    )
+    await vRFCoordinatorV2Mock.addConsumer(subsciptionId, raffle.address)
+    log("Consumer is added")
+  }
 }
 
 module.exports.tags = ["all", "raffle"]
